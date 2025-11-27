@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Programas - Radio Sentidos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2>📻 Radio Sentidos</h2>
+                <small>Panel Administrativo</small>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span>📊</span> Dashboard
+                </a>
+                <a href="programs.html" class="nav-item active">
+                    <span>📺</span> Programas
+                </a>
+                <a href="news.html" class="nav-item">
+                    <span>📰</span> Noticias
+                </a>
+                <a href="users.html" class="nav-item">
+                    <span>👥</span> Usuarios
+                </a>
+                <a href="#" class="nav-item" onclick="logout()">
+                    <span>🚪</span> Cerrar Sesión
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="content-header">
+                <h1>Gestión de Programas</h1>
+                <div class="user-info">
+                    Bienvenido, <strong id="userName">Usuario</strong>
+                </div>
+            </header>
+
+            <div class="content">
+                <!-- Alertas -->
+                <div id="alertsContainer"></div>
+
+                <!-- Header de acciones -->
+                <div class="content-actions">
+                    <button class="btn btn-primary" onclick="showProgramModal()">
+                        <span>➕</span> Nuevo Programa
+                    </button>
+                    <div class="search-box">
+                        <input type="text" id="searchPrograms" placeholder="Buscar programas..." class="form-control">
+                    </div>
+                </div>
+
+                <!-- Lista de programas -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <div class="table-row">
+                            <div>Programa</div>
+                            <div>Horario</div>
+                            <div>Conductor</div>
+                            <div>Estado</div>
+                            <div>Acciones</div>
+                        </div>
+                    </div>
+                    <div class="table-body" id="programsList">
+                        <!-- Los programas se cargarán aquí -->
+                    </div>
+                </div>
+
+                <!-- Loading -->
+                <div id="loadingPrograms" class="loading">
+                    Cargando programas...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para crear/editar programa -->
+    <div id="programModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="programModalTitle">Nuevo Programa</h3>
+                <button class="modal-close" onclick="closeProgramModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="programForm">
+                    <input type="hidden" id="programId">
+                    
+                    <div class="form-group">
+                        <label for="programTitle">Título del Programa *</label>
+                        <input type="text" id="programTitle" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="programDescription">Descripción</label>
+                        <textarea id="programDescription" class="form-control" rows="3" placeholder="Descripción del programa..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="programHost">Conductor/Anfitrión</label>
+                        <input type="text" id="programHost" class="form-control" placeholder="Nombre del conductor...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="programSchedule">Horario *</label>
+                        <input type="text" id="programSchedule" class="form-control" required placeholder="Ej: Lunes a Viernes 08:00 - 10:00">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="programImage">URL de Imagen</label>
+                        <input type="text" id="programImage" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+                        <small class="text-muted">URL de una imagen para el programa (opcional)</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeProgramModal()">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="saveProgram()">Guardar Programa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirmar acción</h3>
+                <button class="modal-close" onclick="closeConfirmModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">¿Estás seguro de que quieres realizar esta acción?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeConfirmModal()">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmActionBtn">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script src="programs.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs de Actividad - Radio Sentidos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2>📻 Radio Sentidos</h2>
+                <small>Panel Administrativo</small>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span>📊</span> Dashboard
+                </a>
+                <a href="programs.html" class="nav-item">
+                    <span>📺</span> Programas
+                </a>
+                <a href="news.html" class="nav-item">
+                    <span>📰</span> Noticias
+                </a>
+                <a href="users.html" class="nav-item">
+                    <span>👥</span> Usuarios
+                </a>
+                <a href="logs.html" class="nav-item active">
+                    <span>📝</span> Logs
+                </a>
+                <a href="#" class="nav-item" onclick="logout()">
+                    <span>🚪</span> Cerrar Sesión
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="content-header">
+                <h1>Logs de Actividad</h1>
+                <div class="user-info">
+                    Bienvenido, <strong id="userName">Usuario</strong>
+                </div>
+            </header>
+
+            <div class="content">
+                <!-- Alertas -->
+                <div id="alertsContainer"></div>
+
+                <!-- Filtros -->
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="daysFilter">Período:</label>
+                        <select id="daysFilter" class="form-control" onchange="loadStats()">
+                            <option value="7">Últimos 7 días</option>
+                            <option value="30">Últimos 30 días</option>
+                            <option value="90">Últimos 90 días</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Estadísticas -->
+                <div class="stats-grid" id="activityStats">
+                    <!-- Las estadísticas se cargarán aquí -->
+                </div>
+
+                <!-- Lista de logs -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <div class="table-row">
+                            <div>Usuario</div>
+                            <div>Acción</div>
+                            <div>Recurso</div>
+                            <div>Detalles</div>
+                            <div>IP</div>
+                            <div>Fecha</div>
+                        </div>
+                    </div>
+                    <div class="table-body" id="logsList">
+                        <!-- Los logs se cargarán aquí -->
+                    </div>
+                </div>
+
+                <!-- Loading -->
+                <div id="loadingLogs" class="loading">
+                    Cargando logs...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script src="logs.js"></script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Noticias - Radio Sentidos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2>📻 Radio Sentidos</h2>
+                <small>Panel Administrativo</small>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span>📊</span> Dashboard
+                </a>
+                <a href="programs.html" class="nav-item">
+                    <span>📺</span> Programas
+                </a>
+                <a href="news.html" class="nav-item active">
+                    <span>📰</span> Noticias
+                </a>
+                <a href="users.html" class="nav-item">
+                    <span>👥</span> Usuarios
+                </a>
+                <a href="#" class="nav-item" onclick="logout()">
+                    <span>🚪</span> Cerrar Sesión
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="content-header">
+                <h1>Gestión de Noticias</h1>
+                <div class="user-info">
+                    Bienvenido, <strong id="userName">Usuario</strong>
+                </div>
+            </header>
+
+            <div class="content">
+                <!-- Alertas -->
+                <div id="alertsContainer"></div>
+
+                <!-- Header de acciones -->
+                <div class="content-actions">
+                    <button class="btn btn-primary" onclick="showNewsModal()">
+                        <span>➕</span> Nueva Noticia
+                    </button>
+                    <div class="search-box">
+                        <input type="text" id="searchNews" placeholder="Buscar noticias..." class="form-control">
+                    </div>
+                </div>
+
+                <!-- Lista de noticias -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <div class="table-row">
+                            <div>Título</div>
+                            <div>Categoría</div>
+                            <div>Autor</div>
+                            <div>Estado</div>
+                            <div>Fecha</div>
+                            <div>Acciones</div>
+                        </div>
+                    </div>
+                    <div class="table-body" id="newsList">
+                        <!-- Las noticias se cargarán aquí -->
+                    </div>
+                </div>
+
+                <!-- Loading -->
+                <div id="loadingNews" class="loading">
+                    Cargando noticias...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para crear/editar noticia -->
+    <div id="newsModal" class="modal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h3 id="newsModalTitle">Nueva Noticia</h3>
+                <button class="modal-close" onclick="closeNewsModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="newsForm">
+                    <input type="hidden" id="newsId">
+                    
+                    <div class="form-group">
+                        <label for="newsTitle">Título de la Noticia *</label>
+                        <input type="text" id="newsTitle" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsExcerpt">Resumen</label>
+                        <textarea id="newsExcerpt" class="form-control" rows="2" placeholder="Resumen breve de la noticia..."></textarea>
+                        <small class="text-muted">Si se deja vacío, se generará automáticamente del contenido</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsContent">Contenido *</label>
+                        <textarea id="newsContent" class="form-control" rows="6" required placeholder="Contenido completo de la noticia..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsCategory">Categoría</label>
+                        <select id="newsCategory" class="form-control">
+                            <option value="general">General</option>
+                            <option value="local">Local</option>
+                            <option value="deportes">Deportes</option>
+                            <option value="cultura">Cultura</option>
+                            <option value="entretenimiento">Entretenimiento</option>
+                            <option value="politica">Política</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeNewsModal()">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="saveNews()">Guardar Noticia</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script src="news.js"></script>
+</body>
+</html>

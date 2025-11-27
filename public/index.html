@@ -1,0 +1,898 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Sentidos 96.9 FM - Firmat, Santa Fe</title>
+    <meta name="description" content="Radio Sentidos 96.9 FM - La voz de Firmat, Santa Fe. Información, música y entretenimiento las 24 horas.">
+    <meta name="keywords" content="radio, firmat, santa fe, 96.9 fm, música, noticias, entretenimiento">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --primary-light: #6366f1;
+            --secondary: #f59e0b;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+            --text: #1e293b;
+            --text-light: #f1f5f9;
+            --shadow: 0 10px 25px rgba(0,0,0,0.2);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, var(--darker) 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Mejorado */
+        .header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .frequency {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+        }
+
+        .nav a:hover {
+            color: var(--primary);
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        /* Player Mejorado */
+        .player-bar {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .player-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .now-playing {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .track-info {
+            flex: 1;
+        }
+
+        .track-name {
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+        }
+
+        .track-artist {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .play-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4);
+        }
+
+        .play-btn.playing {
+            background: linear-gradient(135deg, var(--secondary), #f97316);
+        }
+
+        .listeners {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Hero Section Mejorada */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(79, 70, 229, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero h1 .accent {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 4rem 2rem;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        /* Programs Section */
+        .section {
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .programs-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .program-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .program-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .program-content {
+            padding: 1.5rem;
+        }
+
+        .program-schedule {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .program-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .program-host {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .program-description {
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        /* News Section */
+        .news-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .news-category {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .news-excerpt {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .news-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(2, 6, 23, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav ul {
+                gap: 1rem;
+            }
+            
+            .player-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        /* Animaciones */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">📻</div>
+                <div>
+                    <div class="logo-text">RADIO SENTIDOS</div>
+                    <div class="frequency">96.9 FM - Firmat, Santa Fe</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#programas">Programas</a></li>
+                    <li><a href="#noticias">Noticias</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>RADIO <span class="accent">SENTIDOS</span><br>96.9 FM</h1>
+            <p>La voz de Firmat, Santa Fe. Información, música y entretenimiento las 24 horas.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" id="playMain">
+                    <span>▶</span> Escuchar en Vivo
+                </button>
+                <a href="#programas" class="btn btn-secondary">
+                    <span>📺</span> Ver Programación
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid" id="statsContainer">
+            <div class="stat-card floating">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number" id="listenersCount">0</div>
+                <div class="stat-label">Oyentes en Vivo</div>
+            </div>
+            <div class="stat-card floating" style="animation-delay: 0.2s;">
+                <div class="stat-icon">📺</div>
+                <div class="stat-number" id="programsCount">0</div>
+                <div class="stat-label">Programas Activos</div>
+            </div>
+            <div class="stat-card floating" style="animation-delay: 0.4s;">
+                <div class="stat-icon">📰</div>
+                <div class="stat-number" id="newsCount">0</div>
+                <div class="stat-label">Noticias Publicadas</div>
+            </div>
+            <div class="stat-card floating" style="animation-delay: 0.6s;">
+                <div class="stat-icon">⏰</div>
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Transmisión Continua</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="section" id="programas">
+        <h2 class="section-title">Nuestra Programación</h2>
+        <p class="section-subtitle">Descubre los mejores programas de radio con contenido variado para todos los gustos</p>
+        <div class="programs-grid" id="programsGrid">
+            <!-- Los programas se cargarán aquí -->
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="section" id="noticias" style="background: rgba(15, 23, 42, 0.6);">
+        <h2 class="section-title">Últimas Noticias</h2>
+        <p class="section-subtitle">Mantente informado con las últimas noticias de Firmat y la región</p>
+        <div class="news-grid" id="newsGrid">
+            <!-- Las noticias se cargarán aquí -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contacto">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Radio Sentidos 96.9 FM</h3>
+                <p>La voz de Firmat, Santa Fe. Información, música y entretenimiento las 24 horas.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📹</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>📍 Firmat, Santa Fe, Argentina</p>
+                <p>📧 contacto@radiosentidos.com</p>
+                <p>📞 +54 3465 123456</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#programas">Programas</a></li>
+                    <li><a href="#noticias">Noticias</a></li>
+                    <li><a href="/admin">Panel Admin</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Radio Sentidos 96.9 FM. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Player Bar -->
+    <div class="player-bar">
+        <div class="player-content">
+            <div class="now-playing">
+                <div class="track-info">
+                    <div class="track-name" id="nowPlaying">Radio Sentidos 96.9 FM</div>
+                    <div class="track-artist" id="currentProgram">Programa en Vivo</div>
+                </div>
+            </div>
+            <div class="player-controls">
+                <div class="listeners">
+                    <span>👥</span>
+                    <span id="currentListeners">0 oyentes</span>
+                </div>
+                <button class="play-btn" id="playBtn">▶</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuración
+        const API_BASE = '/api/public';
+        const audioPlayer = new Audio();
+        let isPlaying = false;
+        let currentStats = {};
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStats();
+            loadPrograms();
+            loadNews();
+            setupStream();
+            
+            // Actualizar estadísticas cada 30 segundos
+            setInterval(loadStats, 30000);
+        });
+
+        // Cargar estadísticas
+        async function loadStats() {
+            try {
+                const response = await fetch(API_BASE + '/stats');
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentStats = data.data;
+                    updateStatsDisplay();
+                }
+            } catch (error) {
+                console.error('Error cargando estadísticas:', error);
+            }
+        }
+
+        // Actualizar display de estadísticas
+        function updateStatsDisplay() {
+            document.getElementById('listenersCount').textContent = currentStats.currentListeners || 0;
+            document.getElementById('programsCount').textContent = currentStats.activePrograms || 0;
+            document.getElementById('newsCount').textContent = currentStats.publishedNews || 0;
+            document.getElementById('currentListeners').textContent = (currentStats.currentListeners || 0) + ' oyentes';
+        }
+
+        // Cargar programas
+        async function loadPrograms() {
+            try {
+                const response = await fetch(API_BASE + '/programs');
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayPrograms(data.data.programs);
+                }
+            } catch (error) {
+                console.error('Error cargando programas:', error);
+            }
+        }
+
+        // Mostrar programas
+        function displayPrograms(programs) {
+            const grid = document.getElementById('programsGrid');
+            
+            if (!programs || programs.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray);">No hay programas disponibles en este momento.</p>';
+                return;
+            }
+
+            grid.innerHTML = programs.slice(0, 6).map(program => `
+                <div class="program-card">
+                    <div class="program-image">
+                        ${program.image_url ? 
+                            `<img src="${program.image_url}" alt="${program.title}" style="width: 100%; height: 100%; object-fit: cover;">` :
+                            '📻'
+                        }
+                    </div>
+                    <div class="program-content">
+                        <div class="program-schedule">${program.schedule}</div>
+                        <h3 class="program-title">${program.title}</h3>
+                        ${program.host ? `<div class="program-host">Conductor: ${program.host}</div>` : ''}
+                        ${program.description ? `<p class="program-description">${program.description}</p>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Cargar noticias
+        async function loadNews() {
+            try {
+                const response = await fetch(API_BASE + '/news?limit=6');
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayNews(data.data.news);
+                }
+            } catch (error) {
+                console.error('Error cargando noticias:', error);
+            }
+        }
+
+        // Mostrar noticias
+        function displayNews(news) {
+            const grid = document.getElementById('newsGrid');
+            
+            if (!news || news.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray);">No hay noticias disponibles en este momento.</p>';
+                return;
+            }
+
+            grid.innerHTML = news.map(item => `
+                <div class="news-card">
+                    <div class="news-category">${item.category || 'General'}</div>
+                    <h3 class="news-title">${item.title}</h3>
+                    <p class="news-excerpt">${item.excerpt || item.content.substring(0, 150) + '...'}</p>
+                    <div class="news-date">${new Date(item.published_at || item.created_at).toLocaleDateString('es-ES')}</div>
+                </div>
+            `).join('');
+        }
+
+        // Configurar stream
+        async function setupStream() {
+            try {
+                const response = await fetch('/api/stream');
+                const data = await response.json();
+                
+                if (data.success) {
+                    audioPlayer.src = data.data.streamUrl;
+                    document.getElementById('nowPlaying').textContent = data.data.nowOnAir.program;
+                    document.getElementById('currentProgram').textContent = data.data.nowOnAir.host;
+                }
+            } catch (error) {
+                console.error('Error configurando stream:', error);
+            }
+        }
+
+        // Controlar reproducción
+        function togglePlay() {
+            if (isPlaying) {
+                audioPlayer.pause();
+                document.getElementById('playBtn').textContent = '▶';
+                document.getElementById('playBtn').classList.remove('playing');
+                document.getElementById('playMain').innerHTML = '<span>▶</span> Escuchar en Vivo';
+            } else {
+                audioPlayer.play().catch(e => {
+                    console.log('Error reproduciendo:', e);
+                    alert('Error al conectar con la radio. Intente nuevamente.');
+                });
+                document.getElementById('playBtn').textContent = '⏸';
+                document.getElementById('playBtn').classList.add('playing');
+                document.getElementById('playMain').innerHTML = '<span>⏸</span> En Vivo';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Event listeners
+        document.getElementById('playBtn').addEventListener('click', togglePlay);
+        document.getElementById('playMain').addEventListener('click', togglePlay);
+
+        // Smooth scroll para navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efectos de scroll para header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(2, 6, 23, 0.95)';
+            } else {
+                header.style.background = 'rgba(15, 23, 42, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>

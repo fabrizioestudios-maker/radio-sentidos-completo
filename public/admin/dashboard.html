@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Radio Sentidos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2>📻 Radio Sentidos</h2>
+                <small>Panel Administrativo</small>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <span>📊</span> Dashboard
+                </a>
+                <a href="programs.html" class="nav-item">
+                    <span>📺</span> Programas
+                </a>
+                <a href="news.html" class="nav-item">
+                    <span>📰</span> Noticias
+                </a>
+                <a href="users.html" class="nav-item">
+                    <span>👥</span> Usuarios
+                </a>
+                <a href="#" class="nav-item" onclick="logout()">
+                    <span>🚪</span> Cerrar Sesión
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="content-header">
+                <h1>Dashboard</h1>
+                <div class="user-info">
+                    Bienvenido, <strong id="userName">Usuario</strong>
+                </div>
+            </header>
+
+            <div class="content">
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h3>Usuarios Activos</h3>
+                            <div class="stat-value" id="statUsers">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📺</div>
+                        <div class="stat-info">
+                            <h3>Programas Activos</h3>
+                            <div class="stat-value" id="statPrograms">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📰</div>
+                        <div class="stat-info">
+                            <h3>Noticias Publicadas</h3>
+                            <div class="stat-value" id="statNews">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👁️</div>
+                        <div class="stat-info">
+                            <h3>En Vivo</h3>
+                            <div class="stat-value">Sí</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Acciones Rápidas</h2>
+                    <div class="actions-grid">
+                        <a href="programs.html?action=create" class="action-card">
+                            <span>➕</span>
+                            <h3>Nuevo Programa</h3>
+                            <p>Crear un nuevo programa de radio</p>
+                        </a>
+                        <a href="news.html?action=create" class="action-card">
+                            <span>📝</span>
+                            <h3>Nueva Noticia</h3>
+                            <p>Publicar una nueva noticia</p>
+                        </a>
+                        <a href="programs.html" class="action-card">
+                            <span>📋</span>
+                            <h3>Gestionar Programas</h3>
+                            <p>Ver y editar programas</p>
+                        </a>
+                        <a href="news.html" class="action-card">
+                            <span>📰</span>
+                            <h3>Gestionar Noticias</h3>
+                            <p>Ver y editar noticias</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-activity">
+                    <h2>Actividad Reciente</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">📺</div>
+                            <div class="activity-content">
+                                <p><strong>Nuevo programa creado</strong></p>
+                                <small>Hace 2 horas - Programa Matutino</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">📰</div>
+                            <div class="activity-content">
+                                <p><strong>Noticia publicada</strong></p>
+                                <small>Hace 5 horas - Eventos comunitarios</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script>
+        // Cargar estadísticas al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStats();
+            document.getElementById('userName').textContent = currentUser.username + ' (' + currentUser.role + ')';
+        });
+
+        async function loadStats() {
+            try {
+                const response = await fetch(API_BASE + '/admin/dashboard', {
+                    headers: {
+                        'Authorization': 'Bearer ' + currentToken
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('statUsers').textContent = data.stats.totalUsers;
+                    document.getElementById('statPrograms').textContent = data.stats.activePrograms;
+                    document.getElementById('statNews').textContent = data.stats.publishedNews;
+                }
+            } catch (error) {
+                console.error('Error cargando estadísticas:', error);
+            }
+        }
+    </script>
+</body>
+</html>
